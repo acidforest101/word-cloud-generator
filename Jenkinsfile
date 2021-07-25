@@ -7,13 +7,13 @@ pipeline {
     stage ('Create container for WCG') {
       agent {
         dockerfile { filename 'Dockerfile1'
-                     args '--privileged --network host -u root'
+                     args '--network host'
         }
       }
       stages {
         stage('Get WCG source code') {
           steps { sh '''
-	    export GOPATH=$WORKSPACE
+            export GOPATH=$WORKSPACE
             export PATH="$PATH:$(go env GOPATH)/bin"
             go get github.com/tools/godep
             go get github.com/smartystreets/goconvey
@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Building code and uploading artifacts to Nexus') { 
           steps {sh '''
-	         export GOPATH=$WORKSPACE
+                 export GOPATH=$WORKSPACE
                  export PATH="$PATH:$(go env GOPATH)/bin"
                  rm -f artifacts/*
                  sed -i 's/1.DEVELOPMENT/1.$BUILD_NUMBER/g' ./rice-box.go
