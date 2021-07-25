@@ -8,6 +8,7 @@ pipeline {
       agent {
         dockerfile { filename 'Dockerfile1'
                      args '--privileged --network host -u root'
+		    alwaysPull true
         }
       }
       stages {
