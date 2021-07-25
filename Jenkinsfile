@@ -12,7 +12,7 @@ pipeline {
       }
       stages {
         stage('Get WCG source code') { 
-          steps { sh '''GOPATH=$WORKSPACE
+          steps { sh '''export GOPATH=$WORKSPACE
 export PATH=&quot;$PATH:$(go env GOPATH)/bin&quot;
 go get github.com/tools/godep
 go get github.com/smartystreets/goconvey
