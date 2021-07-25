@@ -48,7 +48,7 @@ pipeline {
              stages {
                stage ('Download artifact from vault and start it') {
                  steps { sh '''
-                         curl -X GET -u downloader:downloader "http://192.168.66.11:8081/repository/word-cloud-generator/webapp/word-cloud-generator/1.$BUILD_NUMBER/word-cloud-generator-1.$BUILD_NUMBER.gz" -o /opt/WCG/word-cloud-generator.gz
+                         curl -X GET -u downloader:downloader "http://192.168.66.11:8081/repository/word-cloud-generator/1/word-cloud-generator/1.$BUILD_NUMBER/word-cloud-generator-1.$BUILD_NUMBER.gz" -o /opt/WCG/word-cloud-generator.gz
                          gunzip -f /opt/WCG/word-cloud-generator.gz
                          rm -f artifacts/*
                          chmod +x /opt/WCG/word-cloud-generator
