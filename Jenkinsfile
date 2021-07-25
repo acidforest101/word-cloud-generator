@@ -20,8 +20,6 @@ pipeline {
             go get github.com/GeertJohan/go.rice/rice
             go get github.com/acidforest101/word-cloud-generator/wordyapi
             go get github.com/gorilla/mux
-	    make lint
-	    make check
             '''
           }
         }
