@@ -7,7 +7,7 @@ pipeline {
     stage ('Create container for WCG') {
       agent {
         dockerfile { filename 'Dockerfile1'
-                     args '--privileged'
+                     args '--network host'
         }
       }
       stages {
@@ -49,7 +49,7 @@ pipeline {
              agent {
                dockerfile { filename 'Dockerfile2'
                             dir 'alpine'
-                            args '--privileged'
+                            args '--network host'
                }
              }
              stages {
