@@ -34,7 +34,7 @@ pipeline {
                  mv ./artifacts/word-cloud-generator.gz ./artifacts/word-cloud-generator
                  ls ./artifacts/
                  '''
-                 nexusArtifactUploader artifacts: [[artifactId: 'word-cloud-generator', classifier: '', file: 'artifacts/word-cloud-generator', type: 'gz']], credentialsId: 'upload', groupId: '1', nexusUrl: 'localhost:81', nexusVersion: 'nexus3', protocol: 'http', repository: 'word-cloud-generator', version: '1.$BUILD_NUMBER'               }
+                 nexusArtifactUploader artifacts: [[artifactId: 'word-cloud-generator', classifier: '', file: 'artifacts/word-cloud-generator', type: 'gz']], credentialsId: 'upload', groupId: '1', nexusUrl: '192.168.66.11:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'word-cloud-generator', version: '1.$BUILD_NUMBER'               }
              }
            }
     }
