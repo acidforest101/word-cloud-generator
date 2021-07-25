@@ -1,8 +1,8 @@
 pipeline {
   agent none
-  options {
-    timestamps ()
-  }
+#  options {
+#    timestamps ()
+#  }
   stages {
     stage ('Create container for WCG') {
       agent {
