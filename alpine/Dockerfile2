@@ -3,6 +3,9 @@ RUN apk update &&\
     apk add curl\
             wget\
             zsh\
-            gzip
+            gzip\
+            libc6-compat\
+            jq\
+            openrc
 RUN mkdir /opt/WCG
     
