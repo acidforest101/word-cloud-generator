@@ -49,7 +49,7 @@ pipeline {
              agent {
                dockerfile { filename 'Dockerfile2'
                             dir 'alpine'
-                            args '--privileged --network host'
+                            args '--network host'
                }
              }
              stages {
