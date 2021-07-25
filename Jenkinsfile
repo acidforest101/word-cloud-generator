@@ -12,16 +12,15 @@ pipeline {
       }
       stages {
         stage('Get WCG source code') {
-          steps { echo "probuem"
-		  sh '''
-	  export GOPATH=$WORKSPACE
-          export PATH="$PATH:$(go env GOPATH)/bin"
-          go get github.com/tools/godep
-          go get github.com/smartystreets/goconvey
-          go get github.com/GeertJohan/go.rice/rice
-          go get github.com/acidforest101/word-cloud-generator/wordyapi
-          go get github.com/gorilla/mux
-'''
+          steps { sh '''
+	    export GOPATH=$WORKSPACE
+            export PATH="$PATH:$(go env GOPATH)/bin"
+            go get github.com/tools/godep
+            go get github.com/smartystreets/goconvey
+            go get github.com/GeertJohan/go.rice/rice
+            go get github.com/acidforest101/word-cloud-generator/wordyapi
+            go get github.com/gorilla/mux
+            '''
           }
         }
         stage('Make lint and check') {
