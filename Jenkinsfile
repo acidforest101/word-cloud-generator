@@ -7,7 +7,7 @@ pipeline {
     stage ('Create container for WCG') {
       agent {
         dockerfile { filename 'Dockerfile1'
-                     args '--privileged --network host'
+                     args '--privileged --network host -u root'
         }
       }
       stages {
