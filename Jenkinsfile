@@ -37,6 +37,7 @@ pipeline {
                  nexusArtifactUploader artifacts: [[artifactId: 'word-cloud-generator', classifier: '', file: 'artifacts/word-cloud-generator', type: 'gz']], credentialsId: 'upload', groupId: '1', nexusUrl: 'localhost:81', nexusVersion: 'nexus3', protocol: 'http', repository: 'word-cloud-generator', version: '1.$BUILD_NUMBER'               }
              }
            }
+    }
            stage('Integration tests') {
              agent {
                dockerfile { filename 'Dockerfile2'
@@ -68,5 +69,4 @@ pipeline {
              }
            }
          }
-}
 }
