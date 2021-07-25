@@ -34,7 +34,7 @@ pipeline {
                  mv ./artifacts/word-cloud-generator.gz ./artifacts/word-cloud-generator
                  ls ./artifacts/
                  '''
-                 nexusArtifactUploader artifacts: [[artifactId: 'word-cloud-generator', classifier: '', file: 'artifacts/word-cloud-generator', type: 'gz']], credentialsId: 'upload', groupId: 'webapp', nexusUrl: '192.168.66.11:81', nexusVersion: 'nexus3', protocol: 'http', repository: 'word-cloud-generator', version: '1.$BUILD_NUMBER'
+                 nexusArtifactUploader artifacts: [[artifactId: 'word-cloud-generator', classifier: '', file: 'artifacts/word-cloud-generator', type: 'gz']], credentialsId: 'upload', groupId: 'webapp', nexusUrl: '127.0.0.1:81', nexusVersion: 'nexus3', protocol: 'http', repository: 'word-cloud-generator', version: '1.$BUILD_NUMBER'
                  }
                }
              }
@@ -49,7 +49,7 @@ pipeline {
              stages {
                stage ('Download artifact from vault and start it') {
                  steps { sh '''
-                         curl -X GET -u downloader:downloader "http://192.168.66.11:81/repository/word-cloud-generator/webapp/word-cloud-generator/1.$BUILD_NUMBER/word-cloud-generator-1.$BUILD_NUMBER.gz" -o /opt/WCG/word-cloud-generator.gz
+                         curl -X GET -u downloader:downloader "http://127.0.0.1:81/repository/word-cloud-generator/webapp/word-cloud-generator/1.$BUILD_NUMBER/word-cloud-generator-1.$BUILD_NUMBER.gz" -o /opt/WCG/word-cloud-generator.gz
                          gunzip -f /opt/WCG/word-cloud-generator.gz
                          rm -f artifacts/*
                          chmod +x /opt/WCG/word-cloud-generator
