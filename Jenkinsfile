@@ -20,12 +20,12 @@ pipeline {
             go get github.com/GeertJohan/go.rice/rice
             go get github.com/acidforest101/word-cloud-generator/wordyapi
             go get github.com/gorilla/mux
-	    make lint
-	    make test
+            make lint
+            make test
             '''
           }
         }
-        stage('Building code and uploading artifacts to Nexus') { 
+        stage('Building code and uploading artifacts to Nexus') {
           steps {sh '''
                  export GOPATH=$WORKSPACE
                  export PATH="$PATH:$(go env GOPATH)/bin"
@@ -36,9 +36,10 @@ pipeline {
                  mv ./artifacts/word-cloud-generator.gz ./artifacts/word-cloud-generator
                  ls ./artifacts/
                  '''
-                 nexusArtifactUploader artifacts: [[artifactId: 'word-cloud-generator', classifier: '', file: 'artifacts/word-cloud-generator', type: 'gz']], credentialsId: 'upload', groupId: 'webapp', nexusUrl: '192.168.66.11:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'word-cloud-generator', version: '1.$BUILD_NUMBER'               }
-             }
-           }
+                 nexusArtifactUploader artifacts: [[artifactId: 'word-cloud-generator', classifier: '', file: 'artifacts/word-cloud-generator', type: 'gz']], credentialsId: 'upload', groupId: 'webapp', nexusUrl: '192.168.66.11:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'word-cloud-generator', version: '1.$BUILD_NUMBER'
+          }
+        }
+      }
     }
            stage('Integration tests') {
              agent {
@@ -50,7 +51,7 @@ pipeline {
              stages {
                stage ('Download artifact from vault and start it') {
                  steps { sh '''
-		         rm -f artifacts/*
+                         rm -f artifacts/*
                          curl -X GET -u downloader:password "http://192.168.66.11:8081/repository/word-cloud-generator/webapp/word-cloud-generator/1.$BUILD_NUMBER/word-cloud-generator-1.$BUILD_NUMBER.gz" -o /opt/WCG/word-cloud-generator.gz
                          gunzip -f /opt/WCG/word-cloud-generator.gz
                          chmod +x /opt/WCG/word-cloud-generator
@@ -60,7 +61,7 @@ pipeline {
                }
                stage ('Running integration tests') {
                  steps { sh '''
-		         res=`curl -s -H "Content-Type: application/json" -d '{"text":"ths is a really really really important thing this is"}' http://127.0.0.1:8888/version | jq '. | length'`
+                         res=`curl -s -H "Content-Type: application/json" -d '{"text":"ths is a really really really important thing this is"}' http://127.0.0.1:8888/version | jq '. | length'`
                          if [ "1" != "$res" ]; then exit 99; fi
                          res=`curl -s -H "Content-Type: application/json" -d '{"text":"ths is a really really really important thing this is"}' http://127.0.0.1:8888/api | jq '. | length'`
                          if [ "7" != "$res" ]; then exit 99; fi
@@ -69,5 +70,5 @@ pipeline {
                }
              }
            }
-         }
+  }
 }
