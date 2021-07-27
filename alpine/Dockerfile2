@@ -1,11 +1,4 @@
 FROM alpine:latest
-RUN apk update &&\
-    apk add curl\
-            wget\
-            zsh\
-            gzip\
-            libc6-compat\
-            jq\
-            openrc
+RUN apk update && apk add curl wget zsh gzip libc6-compat jq
 RUN mkdir /opt/WCG
     
